@@ -197,7 +197,7 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [self.categoriesTask cancel];
     [self.emojiWallTask cancel];
-    
+    self.unlockedGroups = [MakemojiSDK unlockedGroups];
     [self loadFromDisk:[[MEAPIManager client] cacheNameWithChannel:@"categories"]];
     
     self.categoriesTask = [manager GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -218,7 +218,7 @@
         [[MEAPIManager client] setLockedCategories:[NSArray arrayWithArray:lockedCat]];
         
         self.categories = responseObject;
-        self.unlockedGroups = [MakemojiSDK unlockedGroups];
+
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [self.emojiView reloadData];
         });
@@ -234,6 +234,7 @@
 
 -(void)unlockedNewCategory:(NSNotification *)note {
     self.unlockedGroups = [MakemojiSDK unlockedGroups];
+    [self.collectionView reloadData];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

@@ -38,6 +38,8 @@
 - (void)didSelectEmoji:(NSDictionary *)emoji image:(UIImage *)image;
 - (void)didSelectGif:(NSDictionary *)gif;
 - (void)didSelectCategory;
+- (void)categoryTapped;
+- (void)flashtagTapped;
 - (void)deleteButtonTapped;
 - (void)setTextView:(id)textView;
 - (void)textViewDidBeginEditing:(id)textView;
